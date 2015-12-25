@@ -7,6 +7,31 @@ var audio_context,
 function startUserMedia(stream) {
 
   alert(123)
+
+  var options = {
+    container: '#waveform',
+    waveColor: 'black',
+    interact: false,
+    cursorWidth: 0
+  };
+
+  // Init wavesurfer
+  wavesurfer.init(options);
+
+  // Init Microphone plugin
+  var microphone = Object.create(WaveSurfer.Microphone);
+  microphone.init({
+    wavesurfer: wavesurfer
+  });
+  microphone.on('deviceReady', function () {
+    console.info('Device ready!');
+  });
+  microphone.on('deviceError', function (code) {
+    console.warn('Device error: ' + code);
+  });
+
+  microphone.start();
+
   var input = audio_context.createMediaStreamSource(stream);
   console.log('Media stream created.');
 
