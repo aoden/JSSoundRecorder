@@ -5,6 +5,8 @@ var audio_context,
     currentEditedSoundIndex;
 
 function startUserMedia(stream) {
+
+  alert(123)
   var input = audio_context.createMediaStreamSource(stream);
   console.log('Media stream created.');
 
@@ -60,6 +62,7 @@ function handleWAV(blob) {
   var audioElement = document.createElement('audio');
   var downloadAnchor = document.createElement('a');
   var editButton = document.createElement('button');
+  var uploadButton = document.createElement('button');
   
   audioElement.controls = true;
   audioElement.src = url;
@@ -88,21 +91,23 @@ function handleWAV(blob) {
   };
   editButton.innerHTML = 'Edit';
   editButton.className = 'btn btn-primary';
+  uploadButton.innerHTML = 'Upload';
+  uploadButton.className = 'btn btn-primary';
 
   var newCell = newRow.insertCell(-1);
   newCell.appendChild(audioElement);
   newCell = newRow.insertCell(-1);
   newCell.appendChild(downloadAnchor);
   newCell = newRow.insertCell(-1);
-  newCell.appendChild(editButton);
+  newCell.appendChild(uploadButton);
 
   newCell = newRow.insertCell(-1);
   var toggler;
-  for (var i = 0, l = 8; i < l; i++) {
-    toggler = document.createElement('input');
-    $(toggler).attr('type', 'checkbox');
-    newCell.appendChild(toggler);
-  }
+  //for (var i = 0, l = 8; i < l; i++) {
+  //  toggler = document.createElement('input');
+  //  $(toggler).attr('type', 'checkbox');
+  //  newCell.appendChild(toggler);
+  //}
 }
 
 window.onload = function init() {
